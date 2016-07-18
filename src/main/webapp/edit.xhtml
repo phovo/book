@@ -1,0 +1,75 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:jsf="http://xmlns.jcp.org/jsf"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:fn="http://xmlns.jcp.org/jsp/jstl/functions"
+	encoding="UTF-8"
+	template="template/ui.xhtml">
+	
+	<ui:define name="body">
+		<f:event listener="#{bookDetailBean.readBookDetail}" type="preRenderView"/>
+		<h:form styleClass="frm frm03" id="frmBookEdition">
+			<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+			<p:messages id="messages" showDetail="false" autoUpdate="false" /> 
+			<div class="container-fluid">
+	       		<div id="page" class="ui-widget">
+				       <div class="ui-tabs-content">
+						    <div id="tabs-1" style="margin-left: 50px;margin-top: 50px;">
+						    		<h3>Edit Book</h3>
+						    		<p:outputPanel id="panelBookEdition">
+						    		<h:dataTable binding="#{table}" styleClass="table01" id="tableBook" style="width:500px;"
+							            rowClasses="ui-widget-header" value="#{bookDetailBean.bookDetail}" var="book">
+									    <h:column headerClass="alignleft w20">
+									        <f:facet name="header">
+									            <h:outputText value="ID" />
+									        </f:facet>
+									        <h:outputText id="id" value="#{bookDetailBean.bookDetail.id}"></h:outputText>
+									        <input type="hidden" name="id" value="#{bookDetailBean.bookDetail.id}"/>
+									    </h:column>
+									     <h:column headerClass="alignleft">
+									        <f:facet name="header">
+									            <h:outputText value="Title" />
+									        </f:facet>
+									        <h:inputText id="title" required="true" requiredMessage="The title cannot be empty" styleClass="inputtext01 w250" value="#{bookDetailBean.bookDetail.title}"></h:inputText>
+									    </h:column>
+									     <h:column headerClass="alignleft">
+									        <f:facet name="header">
+									            <h:outputText value="Author" />
+									        </f:facet>
+									        <h:inputText id="author"  required="true" requiredMessage="The author cannot be empty" styleClass="inputtext01 w250" value="#{bookDetailBean.bookDetail.author}"></h:inputText>
+									    </h:column>
+									     <h:column headerClass="alignleft">
+									        <f:facet name="header">
+									            <h:outputText value="Description" />
+									        </f:facet>
+									        <h:inputText styleClass="inputtext01 w250" value="#{bookDetailBean.bookDetail.description}"/> <br/>
+									    </h:column>
+									    <h:column headerClass="alignleft">
+									        <f:facet name="header">
+									            <h:outputText value="Date Created" />
+									        </f:facet>
+									        <h:outputText id="date_create" value="#{bookDetailBean.bookDetail.date_create}"></h:outputText>
+									         <input type="hidden" name="date_create" value="#{bookDetailBean.bookDetail.date_create}"/>
+									    </h:column>
+									    <h:column headerClass="alignleft">
+									        <f:facet name="header">
+									            <h:outputText value="Date Updated" />
+									        </f:facet>
+									         <h:outputText id="date_update" value="#{bookDetailBean.bookDetail.date_update}"></h:outputText>
+									         <input type="hidden" name="date_update" value="#{bookDetailBean.bookDetail.date_update}"/>
+									    </h:column>
+							         </h:dataTable>
+	                             </p:outputPanel>
+			                     <div class="clr"><br/></div>
+				                 <p:commandButton value="OK" id="save" update=":#{p:component('frmBookEdition')}" action="#{bookDetailBean.save}" oncomplete="validate('frmBookEdition', 'home');"/>
+				                 <p:commandButton value="Cancel" id="cancel" onclick="navigate('home');" />
+				       		</div>
+				       </div>
+		       	</div>
+		    </div>
+	     </h:form>
+	</ui:define>
+</ui:composition>

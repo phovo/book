@@ -1,0 +1,61 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:jsf="http://xmlns.jcp.org/jsf"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:fn="http://xmlns.jcp.org/jsp/jstl/functions"
+	encoding="UTF-8"
+	template="template/ui.xhtml">
+	
+	<ui:define name="body">
+		<f:event listener="#{bookDetailBean.initBookCreation}" type="preRenderView"/>
+		<h:form styleClass="frm frm03" id="frmBookCreation">
+			<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+			<p:messages id="messages" showDetail="false" autoUpdate="false" /> 
+			<div class="container-fluid">
+	       		<div id="page" class="ui-widget">
+				       <div class="ui-tabs-content">
+						    <div id="tabs-1" style="margin-left: 50px;margin-top: 50px;">
+						    		<h3>Add Book</h3>
+						    		<p:outputPanel id="panelBookCreation">
+			                      	 <table id="tblAssignedProducts" class="table01" style="width:877px;">
+	                                       <thead>
+	                                           <tr>
+	                                               <th class="alignleft w20">ID</th>
+	                                               <th class="alignleft">Title</th>
+	                                               <th class="alignleft">Author</th>
+	                                               <th class="alignleft">Description</th>
+	                                               <th class="alignleft">Date Created</th>
+	                                               <th class="alignleft">Date Updated</th>
+	                                           </tr>
+	                                       </thead>
+	                                       <tbody>
+	                                           <tr>
+	                                           	   <td></td>
+	                                               <td>
+	                                               		<h:inputText id="title" required="true" requiredMessage="The title cannot be empty" styleClass="inputtext01 w250" value="#{bookDetailBean.bookDetail.title}"></h:inputText>
+						                            </td>
+	                                               <td>
+	                                               		<h:inputText id="author" required="true" requiredMessage="The author cannot be empty" styleClass="inputtext01 w250" value="#{bookDetailBean.bookDetail.author}"></h:inputText>
+						                            </td>
+	                                               <td>
+	                                               		 <h:inputText styleClass="inputtext01 w250" value="#{bookDetailBean.bookDetail.description}"/> <br/>
+	                                               </td>
+	                                               <td>#{bookDetailBean.bookDetail.date_create}</td>
+	                                               <td>#{bookDetailBean.bookDetail.date_update}</td>
+	                                           </tr>
+	                                       </tbody>
+	                                   </table>
+	                                   </p:outputPanel>
+			                      <div class="clr"><br/></div>
+			                      <p:commandButton value="OK" id="save" update=":#{p:component('frmBookCreation')}" actionListener="#{bookDetailBean.save}" oncomplete="validate('frmBookCreation', 'home');"/>
+                 				  <p:commandButton value="Cancel" id="cancel" onclick="navigate('home');" />
+				       		</div>
+				       </div>
+		       	</div>
+		    </div>
+	     </h:form>
+	</ui:define>
+</ui:composition>

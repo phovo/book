@@ -1,0 +1,4 @@
+-------------------------------------------------------------------------------
+Test set: neo.lib.BookdemoApplicationTests
+-------------------------------------------------------------------------------
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 28.541 sec - in neo.lib.BookdemoApplicationTests
